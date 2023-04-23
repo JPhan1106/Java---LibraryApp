@@ -176,7 +176,7 @@ public class Library {
 
 		BorrowHistory customer1Book3 = new BorrowHistory();
 		customer1Book3.customer = customer1;
-		customer1Book3.book = book2;
+		customer1Book3.book = book3;
 		customer1Book3.borrowDate = "01/04/2022";
 		customer1Book3.isReturned = false;
 
@@ -223,7 +223,10 @@ public class Library {
 				customer2Book4, customer3Book3, customer3Book1, customer3Book4, customer4Book4 };
 
 		// print all borrow list
-		getAllBorrowList(customers, borrowHistorys);
+		getAllBorrowList(borrowHistorys);
+
+		// print borrow list of each customer
+		getBorrowListOfEachCustomer(customers, borrowHistorys);
 
 		// print status of a book
 		getBorrowReturnStatusOfAbook(books, borrowHistorys);
@@ -231,7 +234,23 @@ public class Library {
 	}
 
 	// Function to print all borrow list
-	public static void getAllBorrowList(Customer[] customers, BorrowHistory[] borrowHistorys) {
+	public static void getAllBorrowList(BorrowHistory[] borrowHistorys) {
+		System.out.println("All borrow list is shown as below: ");
+		System.out.println("        ");
+		for (BorrowHistory borrowHistory : borrowHistorys) {
+			if (borrowHistory.isReturned == true) {
+				System.out.println("Book : " + borrowHistory.book.name + " ---Customer: " + borrowHistory.customer.name
+						+ " --- Borrow date: " + borrowHistory.borrowDate + " --- Return date: "
+						+ borrowHistory.returnDate);
+			} else {
+				System.out.println("Book : " + borrowHistory.book.name + " ---Customer: " + borrowHistory.customer.name
+						+ " --- Borrow date: " + borrowHistory.borrowDate + " --- Has yet been returned");
+			}
+		}
+	}
+
+	// Function to print borrow list of each customer
+	public static void getBorrowListOfEachCustomer(Customer[] customers, BorrowHistory[] borrowHistorys) {
 		for (Customer customer : customers) {
 			System.out.println("Borrow list of " + customer.name + ":");
 			for (BorrowHistory borrowHistory : borrowHistorys) {
